@@ -50,8 +50,8 @@ project/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/CN-PROJECT.git
-cd CN-PROJECT
+git clone https://github.com/mugheeskhan5/Cookie-Based-Cart-Implementation.git
+cd Cookie-Based-Cart-Implementation
 ```
 
 ### 2. Create a virtual environment
