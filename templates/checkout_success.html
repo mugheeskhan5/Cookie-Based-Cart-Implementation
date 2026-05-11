@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center" style="margin-top: 4rem;">
+    <h1 class="page-title" style="color: var(--success);">Order Placed!</h1>
+    <p class="page-subtitle">Your order has been successfully placed. We will ship it soon.</p>
+    
+    <a href="{{ url_for('index') }}" class="btn btn-primary" style="margin-top: 1rem;">Continue Shopping</a>
+</div>
+
+<script>
+    // Clear the cart cookie on successful checkout
+    document.addEventListener("DOMContentLoaded", () => {
+        if(typeof clearCartCookieOnly === 'function') {
+            clearCartCookieOnly();
+        }
+        // Update cart badge visually
+        let countElem = document.getElementById("cart-count");
+        if(countElem) {
+            countElem.innerText = "0";
+        }
+    });
+</script>
+{% endblock %}

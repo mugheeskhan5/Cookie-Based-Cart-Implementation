@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='cart.js') }}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}">🍪 CookieShop</a>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Products</a>
+            <a href="{{ url_for('cart') }}">
+                Cart <span id="cart-count" class="cart-badge">0</span>
+            </a>
+            
+            {% if current_user.is_authenticated %}
+                {% if current_user.role == 'admin' %}
+                    <a href="{{ url_for('admin_dashboard') }}" style="color: var(--danger);">Admin Dashboard</a>
+                {% endif %}
+                <a href="{{ url_for('activity') }}">Activity</a>
+                <a href="{{ url_for('logout') }}" class="auth-link">Logout ({{ current_user.username }})</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="auth-link">Login</a>
+                <a href="{{ url_for('signup') }}" class="btn btn-primary btn-sm">Sign Up</a>
+            {% endif %}
+        </div>
+    </nav>
 
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

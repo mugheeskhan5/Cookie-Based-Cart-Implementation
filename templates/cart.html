@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cart-header">
+    <h1 class="page-title">Your Cart</h1>
+    <button class="btn btn-outline" onclick="clearCart()">Clear Cart</button>
+</div>
+
+<div class="table-wrapper">
+    <table id="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="cart-table-body">
+            <!-- Rendered via JS -->
+        </tbody>
+    </table>
+</div>
+
+<div class="cart-summary" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <span class="cart-total-label">Total Amount:</span>
+        <span class="cart-total-display">$<span id="cart-total">0.00</span></span>
+    </div>
+    
+    <div id="checkout-section" style="display: none; border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 0.5rem;">
+        <h3 style="margin-bottom: 1rem;">Checkout</h3>
+        <form method="POST" action="{{ url_for('checkout') }}" id="checkout-form">
+            <input type="hidden" name="cart_data" id="cart-data-input">
+            <div class="form-group">
+                <label for="shipping_address">Shipping Address</label>
+                <textarea id="shipping_address" name="shipping_address" class="form-control" rows="3" required placeholder="Enter your full shipping address"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center" style="margin-bottom: 2rem;">
+    <h1 class="page-title">Freshly Baked Goodness</h1>
+    <p class="page-subtitle">Discover our selection of premium cookies. Add to your cart and enjoy!</p>
+</div>
+
+<div class="products-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-desc">{{ product.description }}</p>
+        <div class="product-footer">
+            <span class="product-price">${{ "%.2f"|format(product.price) }}</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart('{{ product.id }}', '{{ product.name }}', {{ product.price }})">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
